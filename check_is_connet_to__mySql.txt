@@ -1,0 +1,11 @@
+// connection.connect((err) => {
+//     const sqlInsert = "insert into students (first_name , last_name , year, phone_number) values ('Rakib', 'Khan' , '2015' , '185799855' )";
+
+//     connection.query(sqlInsert, (err, res) => {
+//         console.log('shakil');
+//     })
+//     if (err)
+//         throw err;
+
+//     console.log('connected!!');
+// })

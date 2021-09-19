@@ -1,41 +1,37 @@
 const mysql = require('mysql');
 const express = require('express');
 const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
-require('dotenv').config(); // configure environment veriable
+require('dotenv').config();
+
+
+app.use(bodyParser.json());
+app.use(cors());
+app.use(express.json())
 
 // my authentocation 
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS
+const myStudentDb = mysql.createConnection({
+    host: 'localhost',
+    user: 'nodejs',
+    password: '512988',
+    database: 'grade_system'
 })
 
-// connection way
-// connection.connect((err) => {
-//     const sqlInsert = "insert into students (first_name , last_name , year, phone_number) values ('Rakib', 'Khan' , '2015' , '185799855' )";
-
-//     connection.query(sqlInsert, (err, res) => {
-//         console.log('shakil');
-//     })
-//     if (err)
-//         throw err;
-
-//     console.log('connected!!');
-// })
-
-
 // insert statement
+app.post('/student/api/insert_student_info/', (req, res) => {
+    const FName = req.body.fName;
+    const lName = req.body.lName;
+    const year = req.body.year;
+    const phn = req.body.phn;
 
-app.get('/student', (req, res) => {
-    const sqlInsert = "inserta into students (first_name , last_name , year, phone_number) values ('?', '?' , '?' , '?' )";
-    connection.query(sqlInsert, (err, res) => {
+    const sqlInsert = "insert into students (first_name , last_name , year, phone_number) values (?, ?, ? , ? )";
+    myStudentDb.query(sqlInsert, [FName, lName, year, phn], (err, res) => {
         console.log(res, err);
     })
 
 })
-
-
 
 // certing apis
 app.get('/', async (req, res) => {
@@ -43,9 +39,9 @@ app.get('/', async (req, res) => {
 })
 
 //  selecting the PORT
-app.listen(3000, () => {
-    console.log("Running On Port : 3000");
+app.listen(5000, () => {
+    console.log("Running On Port : 5000");
 })
 
-module.exports = connection;
+// module.exports = myStudentDb;
 
