@@ -7,9 +7,10 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json())
+
 
 // my authentocation 
 const myStudentDb = mysql.createConnection({
@@ -20,6 +21,7 @@ const myStudentDb = mysql.createConnection({
 })
 
 // insert statement
+
 app.post('/student/api/insert_student_info/', (req, res) => {
     const FName = req.body.fName;
     const lName = req.body.lName;
@@ -27,10 +29,19 @@ app.post('/student/api/insert_student_info/', (req, res) => {
     const phn = req.body.phn;
 
     const sqlInsert = "insert into students (first_name , last_name , year, phone_number) values (?, ?, ? , ? )";
-    myStudentDb.query(sqlInsert, [FName, lName, year, phn], (err, res) => {
+    myStudentDb.query(sqlInsert, [FName, lName, year, phn], (err, result) => {
+        res.send(result)
         console.log(res, err);
     })
 
+})
+
+//  getting data from database
+app.get('/student/info/Get/', (req, res) => {
+    const sqlInsert = "SELECT * FROM grade_system.students";
+    myStudentDb.query(sqlInsert, (err, result) => {
+        res.send(result)
+    })
 })
 
 // certing apis
