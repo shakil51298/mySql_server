@@ -44,6 +44,18 @@ app.get('/student/info/Get/', (req, res) => {
     })
 })
 
+//  Delete
+
+app.delete('/delete/studentinfo/:id', (req, res) => {
+    const Studentid = req.params.id;
+    console.log(Studentid);
+    const sqlStatement = "delete from students where id = ?";
+    myStudentDb.query(sqlStatement, Studentid, (err, result) => {
+        res.send(result)
+        console.log(err, result);
+    })
+})
+
 // certing apis
 app.get('/', async (req, res) => {
     res.send("hello Shakil !!")
