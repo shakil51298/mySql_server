@@ -73,9 +73,9 @@ app.put('/update/studentinfo/', (req, res) => {
 app.get('/', async (req, res) => {
     res.send("hello Shakil !!")
 })
-
+const port = 5000;
 //  selecting the PORT
-app.listen(5000, () => {
+app.listen(port, () => {
     console.log("Running On Port : 5000");
 })
 
