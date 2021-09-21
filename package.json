@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node mySql.js",
-    "devStart": "nodemon mySql.js",
+    "start": " nodemon mySql.js",
+    "devStart": "node mySql.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "md khalid hossin",
