@@ -64,7 +64,7 @@ app.put('/update/studentinfo/', (req, res) => {
 
     const sqlUpdateStudentInfo = "UPDATE students SET first_name =?, last_name = ?, year = ?, phone_number = ? WHERE id = ?";
     myStudentDb.query(sqlUpdateStudentInfo, [first_name, last_name, year, phone_number, updateRequestId], (err, result) => {
-        console.log(result);
+        res.send(result)
     })
     console.log(updateRequestId, first_name, last_name, year, phone_number);
 
