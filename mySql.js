@@ -71,7 +71,7 @@ app.put('/update/studentinfo/', (req, res) => {
 })
 // certing apis
 app.get('/', async (req, res) => {
-    res.send("hello Shakil !!")
+    res.send("hello Shakil i am working!")
 })
 const port = 5000;
 //  selecting the PORT
